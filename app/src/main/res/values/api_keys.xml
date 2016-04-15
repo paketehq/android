@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="banner_ad_unit_id"></string>
+    <string name="interstitial_ad_unit_id"></string>
+    <string name="smooch_app_token"></string>
+    <string name="mixpanel_token"></string>
+    <string name="fabric_api_key"></string>
+</resources>
