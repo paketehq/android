@@ -72,7 +72,6 @@ public class AddPackageFragment extends BackHandledFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setupInterstitialAd();
     }
 
     @Override
@@ -157,6 +156,8 @@ public class AddPackageFragment extends BackHandledFragment {
                 .subscribe(binding.buttonAddPackage::setEnabled);
         formIsValid.distinctUntilChanged()
                 .subscribe(binding.toolbar::setEnabled);
+
+        setupInterstitialAd();
 
         return binding.getRoot();
     }
@@ -279,10 +280,15 @@ public class AddPackageFragment extends BackHandledFragment {
                         }
 
                         dialog.dismiss();
-                        if (interstitialAd.isLoaded()) interstitialAd.show();
+                        showInterstitialAd();
                         showPackageDetails(packageReplaySubject);
                     }
                 });
+    }
+
+    private void showInterstitialAd() {
+        if (interstitialAd == null) { return; }
+        if (interstitialAd.isLoaded()) interstitialAd.show();
     }
 
     private void updatePackage() {
