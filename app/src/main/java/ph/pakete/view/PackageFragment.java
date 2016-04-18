@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import ph.pakete.BackHandledFragment;
 import ph.pakete.PackageTrackHistoryAdapter;
@@ -93,7 +94,15 @@ public class PackageFragment extends BackHandledFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        packageViewModel.getPackage().subscribe(aPackage1 -> binding.trackHistoryRecyclerView.getAdapter().notifyDataSetChanged());
+        packageViewModel.getPackage().subscribe(aPackage1 -> {
+            TextView noAvailableInformationYetText = (TextView) getActivity().findViewById(R.id.no_information_available_yet_text);
+            if (packageViewModel.getPackage().getValue().getTrackHistory().size() > 0) {
+                noAvailableInformationYetText.setVisibility(View.GONE);
+            } else {
+                noAvailableInformationYetText.setVisibility(View.VISIBLE);
+            }
+            binding.trackHistoryRecyclerView.getAdapter().notifyDataSetChanged();
+        });
     }
 
     private void editPackage() {
