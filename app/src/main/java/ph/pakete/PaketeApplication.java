@@ -28,7 +28,7 @@ public class PaketeApplication extends Application {
         Smooch.init(this, getResources().getString(R.string.smooch_app_token));
         // Fabric
         // check if fabric token is empty
-        if (!getResources().getString(R.string.fabric_api_key).isEmpty()) {
+        if (BuildConfig.USE_CRASHLYTICS) {
             Fabric.with(this, new Crashlytics());
         }
 
