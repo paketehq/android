@@ -27,6 +27,10 @@ public class Package extends RealmObject {
         return trackingNumber;
     }
 
+    public void setTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
+
     public String getName() {
         return name;
     }
