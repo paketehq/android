@@ -39,4 +39,4 @@ captures/
 *.jks
 
 # Fabric properties
-app/fabric.properties
+fabric.properties
