@@ -86,63 +86,40 @@ public class PackagesViewModel implements ViewModel {
         });
     }
 
-    public Observable<ReplaySubject<Package>> addPackage(String trackingNumber, String name, Courier courier) {
-        return Observable.create(new Observable.OnSubscribe<ReplaySubject<Package>>() {
-            @Override
-            public void call(Subscriber<? super ReplaySubject<Package>> subscriber) {
-                PaketeApplication application = PaketeApplication.get(context);
-                PaketeService paketeService = application.getPaketeService();
+    public Observable<ReplaySubject<Package>> trackPackage(ReplaySubject<Package> aPackage) {
+        return Observable.create((Observable.OnSubscribe<ReplaySubject<Package>>) subscriber -> {
+            PaketeApplication application = PaketeApplication.get(context);
+            PaketeService paketeService = application.getPaketeService();
 
-                Map<String, String> query = new HashMap<>();
-                query.put("courier", courier.getCode());
-                query.put("tracking_number", trackingNumber);
-                paketeService.track(query)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Package>() {
-                            @Override
-                            public void onCompleted() {
-                                subscriber.onCompleted();
-                            }
+            Map<String, String> query = new HashMap<>();
+            query.put("courier", aPackage.getValue().getCourier().getCode());
+            query.put("tracking_number", aPackage.getValue().getTrackingNumber());
+            paketeService.track(query)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<Package>() {
+                        @Override
+                        public void onCompleted() {
+                            subscriber.onCompleted();
+                        }
 
-                            @Override
-                            public void onError(Throwable error) {
-                                subscriber.onError(error);
-                            }
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e(TAG, "Error tracking package ", e);
+                            subscriber.onError(e);
+                        }
 
-                            @Override
-                            public void onNext(Package aPackage) {
-                                Package savedPackage = savePackage(aPackage, name, courier);
-                                // update packages list
-                                ReplaySubject<Package> subject = ReplaySubject.create();
-                                subject.onNext(savedPackage);
-                                packages.getValue().add(0, subject); // add at the top
-                                packages.onNext(packages.getValue());
-                                subscriber.onNext(subject);
-                            }
-                        });
-            }
+                        @Override
+                        public void onNext(Package newPackage) {
+                            newPackage.setName(aPackage.getValue().getName());
+                            newPackage.setCourier(aPackage.getValue().getCourier());
+                            savePackage(newPackage);
+                            ReplaySubject<Package> packageReplaySubject = ReplaySubject.create();
+                            packageReplaySubject.onNext(newPackage);
+                            subscriber.onNext(packageReplaySubject);
+                        }
+                    });
         });
-    }
-
-    public void trackPackage(ReplaySubject<Package> aPackage) {
-        PaketeApplication application = PaketeApplication.get(context);
-        PaketeService paketeService = application.getPaketeService();
-
-        Map<String, String> query = new HashMap<>();
-        query.put("courier", aPackage.getValue().getCourier().getCode());
-        query.put("tracking_number", aPackage.getValue().getTrackingNumber());
-        paketeService.track(query)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext(aPackage1 -> aPackage.onNext(updatePackage(aPackage1)))
-                .doOnError(throwable -> {
-                    Log.e(TAG, "Error tracking package ", throwable);
-                    aPackage.getValue().setUpdating(false);
-                    aPackage.onNext(aPackage.getValue());
-                })
-                .onErrorReturn(throwable1 -> aPackage.getValue())
-                .subscribe();
     }
 
     public Package packageForTrackingNumber(String trackingNumber, Courier courier) {
@@ -160,6 +137,11 @@ public class PackagesViewModel implements ViewModel {
         realm.commitTransaction();
         // trigger update
         aPackage.onNext(aPackage.getValue());
+    }
+
+    public void addPackage(ReplaySubject<Package> aPackage) {
+        packages.getValue().add(0, aPackage); // add at the top
+        packages.onNext(packages.getValue());
     }
 
     public void archivePackage(ReplaySubject<Package> aPackage) {
@@ -189,7 +171,22 @@ public class PackagesViewModel implements ViewModel {
             if (aPackage.getValue().getCompleted() || aPackage.getValue().getUpdating()) { continue; }
             aPackage.getValue().setUpdating(true);
             aPackage.onNext(aPackage.getValue()); // trigger to refresh object
-            trackPackage(aPackage);
+            trackPackage(aPackage)
+                    .subscribe(new Subscriber<ReplaySubject<Package>>() {
+                        @Override
+                        public void onCompleted() { }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            aPackage.getValue().setUpdating(false);
+                            aPackage.onNext(aPackage.getValue());
+                        }
+
+                        @Override
+                        public void onNext(ReplaySubject<Package> packageReplaySubject) {
+                            aPackage.onNext(packageReplaySubject.getValue());
+                        }
+                    });
         }
     }
 
@@ -228,29 +225,11 @@ public class PackagesViewModel implements ViewModel {
         realm.commitTransaction();
     }
 
-    private Package savePackage(Package aPackage, String name, Courier courier) {
+    private void savePackage(Package aPackage) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        aPackage.setCourier(courier);
-        aPackage.setName(name);
-        aPackage.setCourier(courier);
         realm.copyToRealmOrUpdate(aPackage);
         realm.commitTransaction();
-
-        return aPackage;
     }
 
-    private Package updatePackage(Package aPackage) {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        Package existingPackage = realm.where(Package.class)
-                .equalTo("trackingNumber", aPackage.getTrackingNumber())
-                .findFirst();
-        existingPackage.getTrackHistory().deleteAllFromRealm();
-        existingPackage.getTrackHistory().addAll(aPackage.getTrackHistory());
-        existingPackage.setCompleted(aPackage.getCompleted());
-        existingPackage.setUpdating(false);
-        realm.commitTransaction();
-        return existingPackage;
-    }
 }

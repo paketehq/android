@@ -250,11 +250,17 @@ public class AddPackageFragment extends BackHandledFragment {
         }
         // show progress dialog
         ProgressDialog dialog = ProgressDialog.show(getActivity(), null, "Tracking package...");
-        viewModel.addPackage(trackingNumber, binding.editTextName.getText().toString(), courier)
+
+        Package newPackage = new Package();
+        newPackage.setTrackingNumber(trackingNumber);
+        newPackage.setCourier(courier);
+        newPackage.setName(binding.editTextName.getText().toString());
+        ReplaySubject<Package> packageReplaySubject = ReplaySubject.create();
+        packageReplaySubject.onNext(newPackage);
+        viewModel.trackPackage(packageReplaySubject)
                 .subscribe(new Subscriber<ReplaySubject<Package>>() {
                     @Override
-                    public void onCompleted() {
-                    }
+                    public void onCompleted() { }
 
                     @Override
                     public void onError(Throwable e) {
@@ -281,6 +287,9 @@ public class AddPackageFragment extends BackHandledFragment {
 
                         dialog.dismiss();
                         showInterstitialAd();
+                        // add to package list
+                        viewModel.addPackage(packageReplaySubject);
+                        // show package
                         showPackageDetails(packageReplaySubject);
                     }
                 });
