@@ -1,5 +1,6 @@
 Pakete
 ============
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5714849eb7fb020100268222&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5714849eb7fb020100268222/build/latest)
 ![License](https://img.shields.io/github/license/paketehq/android.svg?style=flat)
 
 Pakete is a PH package tracker app for Android.
