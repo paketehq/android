@@ -24,6 +24,7 @@ android {
         debug {
             debuggable true
             minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // disable crashlytics
             buildConfigField "boolean", "USE_CRASHLYTICS", "false"
             ext.enableCrashlytics = false
@@ -32,6 +33,7 @@ android {
         release {
             debuggable false
             minifyEnabled true
+            shrinkResources true  // removes unused graphics etc
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // enable crashlytics
             buildConfigField "boolean", "USE_CRASHLYTICS", "true"
