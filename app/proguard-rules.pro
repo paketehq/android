@@ -23,6 +23,7 @@
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
+-keepattributes EnclosingMethod
 -dontwarn retrofit2.**
 -dontwarn retrofit.**
 -dontwarn rx.internal.util.**
