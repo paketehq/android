@@ -21,6 +21,7 @@ import ph.pakete.databinding.FragmentPackageBinding;
 import ph.pakete.model.MixpanelHelper;
 import ph.pakete.viewmodel.ItemPackageViewModel;
 import ph.pakete.viewmodel.PackagesViewModel;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class PackageFragment extends BackHandledFragment {
 
@@ -106,6 +107,12 @@ public class PackageFragment extends BackHandledFragment {
             }
             binding.trackHistoryRecyclerView.getAdapter().notifyDataSetChanged();
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        packageViewModel.getPackage().unsubscribeOn(AndroidSchedulers.mainThread());
     }
 
     private void editPackage() {
