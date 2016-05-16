@@ -123,7 +123,8 @@ public class PackagesViewModel implements ViewModel {
     public void updatePackageName(String name, ReplaySubject<Package> aPackage) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        aPackage.getValue().setName(name);
+        Package packageToUpdate = realm.where(Package.class).equalTo("trackingNumber", aPackage.getValue().getTrackingNumber()).findFirst();
+        packageToUpdate.setName(name);
         realm.commitTransaction();
         // trigger update
         aPackage.onNext(aPackage.getValue());
@@ -138,7 +139,8 @@ public class PackagesViewModel implements ViewModel {
         packages.getValue().remove(aPackage);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        aPackage.getValue().setArchived(true);
+        Package packageToArchive = realm.where(Package.class).equalTo("trackingNumber", aPackage.getValue().getTrackingNumber()).findFirst();
+        packageToArchive.setArchived(true);
         realm.commitTransaction();
         // trigger to update
         packages.onNext(packages.getValue());
