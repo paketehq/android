@@ -35,16 +35,6 @@ public class PackagesViewModel implements ViewModel {
         this.context = context;
         loadCouriers();
         loadPackages();
-        // nuke track history
-//        Realm realm = Realm.getDefaultInstance();
-//        RealmQuery<Package> query = realm.where(Package.class).equalTo("archived", false);
-//        RealmResults<Package> results = query.findAll();
-//        realm.beginTransaction();
-//        for (int i = 0; i < results.size(); i++) {
-//            Package aPackage = results.get(i);
-//            aPackage.getTrackHistory().deleteAllFromRealm();
-//        }
-//        realm.commitTransaction();
         refreshPackages();
         getCouriers();
     }
