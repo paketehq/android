@@ -76,6 +76,10 @@ public class Package extends RealmObject {
     }
 
     public PackageTrackHistory latestTrackHistory() {
-        return getTrackHistory().first();
+        if (getTrackHistory().size() > 0) {
+            return getTrackHistory().first();
+        } else {
+            return  null;
+        }
     }
 }
