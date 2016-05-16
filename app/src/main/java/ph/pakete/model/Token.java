@@ -102,7 +102,7 @@ public class Token {
         return "";
     }
 
-    private synchronized static String getUniqueID() {
+    public synchronized static String getUniqueID() {
         if (uniqueID == null) {
             SharedPreferences sharedPrefs = PaketeApplication.getAppContext().getSharedPreferences(
                     PREF_UNIQUE_ID, Context.MODE_PRIVATE);
