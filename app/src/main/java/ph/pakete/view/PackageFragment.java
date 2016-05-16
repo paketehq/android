@@ -97,10 +97,12 @@ public class PackageFragment extends BackHandledFragment {
         packageViewModel.getPackage().subscribe(aPackage1 -> {
             if (getActivity() == null) { return; }
             TextView noAvailableInformationYetText = (TextView) getActivity().findViewById(R.id.no_information_available_yet_text);
-            if (packageViewModel.getPackage().getValue().getTrackHistory().size() > 0) {
-                noAvailableInformationYetText.setVisibility(View.GONE);
-            } else {
-                noAvailableInformationYetText.setVisibility(View.VISIBLE);
+            if (noAvailableInformationYetText != null) {
+                if (packageViewModel.getPackage().getValue().getTrackHistory().size() > 0) {
+                    noAvailableInformationYetText.setVisibility(View.GONE);
+                } else {
+                    noAvailableInformationYetText.setVisibility(View.VISIBLE);
+                }
             }
             binding.trackHistoryRecyclerView.getAdapter().notifyDataSetChanged();
         });
