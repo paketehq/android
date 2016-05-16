@@ -4,19 +4,15 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.realm.RealmObject;
-import ph.pakete.SelfSigningClientBuilder;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -34,7 +30,7 @@ public interface PaketeService {
 
     class Factory {
         public static PaketeService create() {
-            OkHttpClient httpClient = SelfSigningClientBuilder.createClient();
+            OkHttpClient httpClient = new OkHttpClient();
             httpClient.setReadTimeout(1, TimeUnit.MINUTES);
             httpClient.setWriteTimeout(1, TimeUnit.MINUTES);
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
