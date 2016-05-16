@@ -4,6 +4,7 @@ package ph.pakete.view;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -296,6 +297,8 @@ public class AddPackageFragment extends BackHandledFragment {
     }
 
     private void showInterstitialAd() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
+        if (preferences.getBoolean("removedAds", false)) { return; }
         if (interstitialAd == null) { return; }
         if (interstitialAd.isLoaded()) interstitialAd.show();
     }

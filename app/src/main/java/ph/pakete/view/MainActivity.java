@@ -1,10 +1,15 @@
 package ph.pakete.view;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,13 +81,17 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
 
         // track mixpanel
         MixpanelHelper.getMixpanel(this).track("Packages View");
+        // listen for broadcast
+        LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver,
+                new IntentFilter("removeAds"));
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         // send all mixpanel events
         MixpanelHelper.getMixpanel(this).flush();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(messageReceiver);
+        super.onDestroy();
     }
 
     @Override
@@ -146,6 +155,10 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
     }
 
     private void setupAdBannerView() {
+        // first we check if the user already purchased remove ads
+        SharedPreferences preferences = getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
+        if (preferences.getBoolean("removedAds", false)) { return; }
+
         String bannerAdUnitID = getResources().getString(R.string.banner_ad_unit_id);
         if (bannerAdUnitID.isEmpty()) { return; }
 
@@ -217,4 +230,16 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    // Our handler for received Intents. This will be called whenever an Intent
+    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // hide ad view
+            LinearLayout adViewLayout = (LinearLayout) findViewById(R.id.adView);
+            if (adViewLayout != null) {
+                adViewLayout.setVisibility(View.GONE);
+            }
+        }
+    };
 }
