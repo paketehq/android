@@ -1,5 +1,7 @@
 package ph.pakete.model;
 
+import android.os.Build;
+
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -13,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.realm.RealmObject;
+import ph.pakete.BuildConfig;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -40,7 +43,9 @@ public interface PaketeService {
             httpClient.interceptors().add(chain -> {
                 Request original = chain.request();
 
+                String user_agent = "Pakete/ph.pakete " + Build.FINGERPRINT + " (" + BuildConfig.VERSION_NAME + ")";
                 Request request = original.newBuilder()
+                        .header("User-Agent", user_agent)
                         .header("Authorization", new Token().toString())
                         .method(original.method(), original.body())
                         .build();
