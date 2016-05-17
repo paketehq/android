@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBar;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import java.util.ArrayList;
@@ -107,13 +110,17 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void onClickTweetAboutPakete(View view) {
+        String tweet = getResources().getString(R.string.share_message) + " " + getResources().getString(R.string.app_url);
         TweetComposer.Builder builder = new TweetComposer.Builder(this)
-                .text(getResources().getString(R.string.share_message_tweet));
+                .text(tweet);
         builder.show();
     }
 
     public void onClickTellYourFriendsAboutPakete(View view) {
-
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse(getResources().getString(R.string.app_url)))
+                .build();
+        ShareDialog.show(this, content);
     }
 
     private void purchaseRemoveAds() {

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
@@ -42,6 +44,9 @@ public class PaketeApplication extends Application {
             kits.add(new Crashlytics());
         }
         Fabric.with(this, kits.toArray(new Kit[kits.size()]));
+        // Facebook
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         context = getApplicationContext();
     }
