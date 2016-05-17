@@ -36,11 +36,14 @@
                 android:id="@+id/header_text"/>
 
             <View
+                android:layout_below="@id/header_text"
                 android:layout_width="match_parent"
                 android:layout_height=".5dp"
+                android:id="@+id/top_separator_view"
                 android:background="@color/lavender_gray" />
 
             <Button
+                android:layout_below="@id/top_separator_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
