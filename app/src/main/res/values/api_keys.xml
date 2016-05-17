@@ -4,4 +4,7 @@
     <string name="interstitial_ad_unit_id"></string>
     <string name="smooch_app_token"></string>
     <string name="mixpanel_token"></string>
+    <string name="twitter_key"></string>
+    <string name="twitter_secret"></string>
+    <string name="license_key"></string>
 </resources>
