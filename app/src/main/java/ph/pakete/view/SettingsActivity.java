@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
@@ -169,6 +170,10 @@ public class SettingsActivity extends AppCompatActivity {
                     if (headerRemoveAdsText != null) {
                         headerRemoveAdsText.setText(text);
                     }
+
+                    // show remove ads layout
+                    RelativeLayout removeAdsLayout = (RelativeLayout) findViewById(R.id.remove_ads_layout);
+                    removeAdsLayout.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -200,6 +205,10 @@ public class SettingsActivity extends AppCompatActivity {
         // broadcast remove ads
         Intent intent = new Intent("removeAds");
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+
+        // remove ads layout
+        RelativeLayout removeAdsLayout = (RelativeLayout) findViewById(R.id.remove_ads_layout);
+        removeAdsLayout.setVisibility(View.GONE);
     }
 
     @Override
