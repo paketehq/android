@@ -4,13 +4,21 @@ import android.app.Application;
 import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.fabric.sdk.android.Fabric;
+import io.fabric.sdk.android.Kit;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.smooch.core.Smooch;
 import ph.pakete.model.PaketeService;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
-import io.fabric.sdk.android.Fabric;
 
 public class PaketeApplication extends Application {
     private PaketeService paketeService;
@@ -26,10 +34,14 @@ public class PaketeApplication extends Application {
         // Smooch
         Smooch.init(this, getResources().getString(R.string.smooch_app_token));
         // Fabric
-        // check if fabric token is empty
+        List<Kit> kits = new ArrayList<>();
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(getResources().getString(R.string.twitter_key), getResources().getString(R.string.twitter_secret));
+        kits.add(new TwitterCore(authConfig));
+        kits.add(new TweetComposer());
         if (BuildConfig.USE_CRASHLYTICS) {
-            Fabric.with(this, new Crashlytics());
+            kits.add(new Crashlytics());
         }
+        Fabric.with(this, kits.toArray(new Kit[kits.size()]));
 
         context = getApplicationContext();
     }
