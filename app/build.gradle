@@ -78,6 +78,7 @@ dependencies {
         transitive = true;
     }
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.github.hotchemi:android-rate:1.0.1'
 }
 
 afterEvaluate {

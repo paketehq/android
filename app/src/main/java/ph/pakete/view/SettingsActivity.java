@@ -19,6 +19,7 @@ import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 import java.util.ArrayList;
 import java.util.List;
 
+import hotchemi.android.rate.AppRate;
 import io.smooch.ui.ConversationActivity;
 import ph.pakete.BuildConfig;
 import ph.pakete.R;
@@ -95,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void onClickWriteAReviewButton(View view) {
-
+        AppRate.with(this).showRateDialog(this);
     }
 
     public void onClickContactPaketeTeamButton(View view) {

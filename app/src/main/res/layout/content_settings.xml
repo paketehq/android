@@ -69,7 +69,7 @@
             android:gravity="left|center_vertical"
             android:textAllCaps="false"
             android:onClick="onClickWriteAReviewButton"
-            android:text="@string/button_text_write_a_review"/>
+            android:text="@string/button_text_rate_pakete"/>
 
         <View
             android:layout_width="match_parent"

@@ -28,6 +28,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import hotchemi.android.rate.AppRate;
+import hotchemi.android.rate.OnClickButtonListener;
 import ph.pakete.BackHandledFragment;
 import ph.pakete.PackagesAdapter;
 import ph.pakete.PaketeApplication;
@@ -84,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         // listen for broadcast
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver,
                 new IntentFilter("removeAds"));
+        // app rater
+        setupAppRater();
     }
 
     @Override
@@ -242,4 +246,10 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
             }
         }
     };
+
+    private void setupAppRater() {
+        AppRate.with(this).monitor();
+        // Show a dialog if meets conditions
+        AppRate.showRateDialogIfMeetsConditions(this);
+    }
 }

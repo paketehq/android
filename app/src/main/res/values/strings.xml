@@ -16,7 +16,7 @@
     <string name="header_text_remove_ads">We may be an ad-supported app, but we understand some would prefer Pakete without ads. Get an ad-free experience and help bring new features to the app for only %1$s. A single purchase works across all of your Android devices forever. We appreciate your support!</string>
     <string name="button_text_remove_ads">Remove Ads</string>
     <string name="header_text_support">We\'d love to know how we can make Pakete even better and would appreciate if you left a review on the Play Store.</string>
-    <string name="button_text_write_a_review">Write a Review</string>
+    <string name="button_text_rate_pakete">Rate Pakete</string>
     <string name="button_text_contact_the_pakete_team">Contact the Pakete Team</string>
     <string name="header_text_tell_your_friends">TELL YOUR FRIENDS</string>
     <string name="button_text_tweet_about_pakete">Tweet about Pakete</string>
@@ -24,4 +24,12 @@
 
     <!-- Share Messages -->
     <string name="share_message_tweet">Checkout out Pakete - a free PH Package Tracking app that I use to track my packages http://pakete.ph</string>
+
+    <!-- App rate -->
+    <string name="rate_dialog_title">Rate Pakete</string>
+    <string name="rate_dialog_message">If you enjoy using Pakete, would you mind taking a moment to rate it? Thanks for your support!</string>
+    <string name="rate_dialog_ok">Rate It Now</string>
+    <string name="rate_dialog_cancel">Remind Me Later</string>
+    <string name="rate_dialog_no">No, Thanks</string>
+
 </resources>
