@@ -63,8 +63,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         // track mixpanel
         MixpanelHelper.getMixpanel(this).track("Settings View");
-        // fetch sku details
-        fetchRemoveAdsSkuDetails();
+        // fetch sku details if needed
+        if (alreadyPurchasedRemoveAds() == false) {
+            fetchRemoveAdsSkuDetails();
+        }
     }
 
     @Override
@@ -154,14 +156,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
 
             if (result.isSuccess() && inventory != null) {
-                // check purchase
-                Purchase removeAdsPurchase = inventory.getPurchase(SKU_REMOVE_ADS);
-                if (removeAdsPurchase != null) {
-                    // go send remove ads
-                    broadcastRemoveAds();
-                    return;
-                }
-
                 SkuDetails removeAdsSkuDetails = inventory.getSkuDetails(SKU_REMOVE_ADS);
                 if (removeAdsSkuDetails != null) {
                     Resources res = getResources();
@@ -209,6 +203,11 @@ public class SettingsActivity extends AppCompatActivity {
         // remove ads layout
         RelativeLayout removeAdsLayout = (RelativeLayout) findViewById(R.id.remove_ads_layout);
         removeAdsLayout.setVisibility(View.GONE);
+    }
+
+    private Boolean alreadyPurchasedRemoveAds() {
+        SharedPreferences preferences = getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
+        return preferences.getBoolean("removedAds", false);
     }
 
     @Override
