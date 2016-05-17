@@ -80,6 +80,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.github.hotchemi:android-rate:1.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.11.0'
+    compile 'com.github.eggheadgames:Siren:1.4.4'
 }
 
 afterEvaluate {

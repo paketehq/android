@@ -24,6 +24,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.eggheadgames.siren.Siren;
+import com.eggheadgames.siren.SirenAlertType;
+import com.eggheadgames.siren.SirenVersionCheckType;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
     private BackHandledFragment selectedFragment;
     private Boolean exit = false;
     private SwipeRefreshLayout swipeContainer;
+    private static final String SIREN_JSON_URL = "http://pakete.ph/siren/version.json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
                 new IntentFilter("removeAds"));
         // app rater
         setupAppRater();
+        // check for update. we force users to update right now
+        Siren siren = Siren.getInstance(getApplicationContext());
+        siren.setMajorUpdateAlertType(SirenAlertType.FORCE);
+        siren.setMinorUpdateAlertType(SirenAlertType.FORCE);
+        siren.setPatchUpdateAlertType(SirenAlertType.FORCE);
+        siren.checkVersion(this, SirenVersionCheckType.DAILY, SIREN_JSON_URL);
     }
 
     @Override
