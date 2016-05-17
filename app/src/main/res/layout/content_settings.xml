@@ -53,6 +53,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/header_text_support"/>
 
         <View
@@ -67,8 +68,67 @@
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:gravity="left|center_vertical"
             android:textAllCaps="false"
-            android:onClick="onClickReportAProblemButton"
-            android:text="@string/button_text_report_a_problem"/>
+            android:onClick="onClickWriteAReviewButton"
+            android:text="@string/button_text_write_a_review"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/lavender_gray" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:onClick="onClickContactPaketeTeamButton"
+            android:text="@string/button_text_contact_the_pakete_team"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/lavender_gray" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/header_text_tell_your_friends"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/lavender_gray" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:onClick="onClickTweetAboutPakete"
+            android:text="@string/button_text_tweet_about_pakete"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:background="@color/lavender_gray" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:gravity="left|center_vertical"
+            android:textAllCaps="false"
+            android:onClick="onClickTellYourFriendsAboutPakete"
+            android:text="@string/button_text_tell_your_friends_about_pakete"/>
 
         <View
             android:layout_width="match_parent"

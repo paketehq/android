@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,8 +94,22 @@ public class SettingsActivity extends AppCompatActivity {
         removeAdsDialogBuilder.create().show();
     }
 
-    public void onClickReportAProblemButton(View view) {
+    public void onClickWriteAReviewButton(View view) {
+
+    }
+
+    public void onClickContactPaketeTeamButton(View view) {
         ConversationActivity.show(this);
+    }
+
+    public void onClickTweetAboutPakete(View view) {
+        TweetComposer.Builder builder = new TweetComposer.Builder(this)
+                .text(getResources().getString(R.string.share_message_tweet));
+        builder.show();
+    }
+
+    public void onClickTellYourFriendsAboutPakete(View view) {
+
     }
 
     private void purchaseRemoveAds() {
