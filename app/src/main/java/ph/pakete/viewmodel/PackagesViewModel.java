@@ -126,6 +126,7 @@ public class PackagesViewModel implements ViewModel {
         Package packageToUpdate = realm.where(Package.class).equalTo("trackingNumber", aPackage.getValue().getTrackingNumber()).findFirst();
         packageToUpdate.setName(name);
         realm.commitTransaction();
+        realm.close();
         // trigger update
         aPackage.onNext(aPackage.getValue());
     }
@@ -142,6 +143,7 @@ public class PackagesViewModel implements ViewModel {
         Package packageToArchive = realm.where(Package.class).equalTo("trackingNumber", aPackage.getValue().getTrackingNumber()).findFirst();
         packageToArchive.setArchived(true);
         realm.commitTransaction();
+        realm.close();
         // trigger to update
         packages.onNext(packages.getValue());
     }
@@ -151,6 +153,7 @@ public class PackagesViewModel implements ViewModel {
         realm.beginTransaction();
         aPackage.setArchived(false);
         realm.commitTransaction();
+        realm.close();
         // update packages list
         ReplaySubject<Package> subject = ReplaySubject.create();
         subject.onNext(aPackage);
@@ -188,6 +191,7 @@ public class PackagesViewModel implements ViewModel {
         RealmResults<Courier> results = query.findAll();
         results.sort("name");
         couriers.onNext(results);
+        realm.close();
     }
 
     private void loadPackages() {
@@ -215,6 +219,7 @@ public class PackagesViewModel implements ViewModel {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(couriers);
         realm.commitTransaction();
+        realm.close();
     }
 
     private void savePackage(Package aPackage) {
@@ -222,6 +227,7 @@ public class PackagesViewModel implements ViewModel {
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(aPackage);
         realm.commitTransaction();
+        realm.close();
     }
 
 }
