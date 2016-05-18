@@ -104,8 +104,8 @@ def initFabricPropertiesIfNeeded() {
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         ant.propertyfile(file: "fabric.properties", comment: commentMessage) {
-            entry(key: "apiSecret", value: properties.getProperty("fabric.ApiSecret"))
-            entry(key: "apiKey", value: properties.getProperty("fabric.ApiKey"))
+            entry(key: "apiSecret", value: properties.getProperty("fabricApiSecret"))
+            entry(key: "apiKey", value: properties.getProperty("fabricApiKey"))
         }
     }
 }
