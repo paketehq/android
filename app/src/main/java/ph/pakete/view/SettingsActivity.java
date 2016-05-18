@@ -30,7 +30,6 @@ import ph.pakete.R;
 import ph.pakete.model.MixpanelHelper;
 import ph.pakete.model.Token;
 import ph.pakete.util.IabHelper;
-import ph.pakete.util.Purchase;
 import ph.pakete.util.SkuDetails;
 
 public class SettingsActivity extends AppCompatActivity {
