@@ -127,7 +127,7 @@ public class PackagesViewModel implements ViewModel {
         packageToUpdate.setName(name);
         realm.commitTransaction();
         // trigger update
-        aPackage.onNext(aPackage.getValue());
+        aPackage.onNext(packageToUpdate);
     }
 
     public void addPackage(ReplaySubject<Package> aPackage) {
