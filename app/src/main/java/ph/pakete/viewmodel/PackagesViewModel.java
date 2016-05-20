@@ -185,18 +185,17 @@ public class PackagesViewModel implements ViewModel {
     private void loadCouriers() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Courier> query = realm.where(Courier.class);
-        RealmResults<Courier> results = query.findAll();
-        results.sort("name");
+        RealmResults<Courier> results = query.findAllSorted("name");
         couriers.onNext(results);
     }
 
     private void loadPackages() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Package> query = realm.where(Package.class).equalTo("archived", false);
-        RealmResults<Package> results = query.findAllSorted("createdAt", Sort.DESCENDING);
+        RealmResults<Package> results = query.findAll();
         // we would like to sort packages by grouping intransit at the top and completed at the bottom
-        RealmResults<Package> inTransitPackages = results.where().equalTo("completed", false).findAll();
-        RealmResults<Package> completedPackages = results.where().equalTo("completed", true).findAll();
+        RealmResults<Package> inTransitPackages = results.where().equalTo("completed", false).findAllSorted("createdAt", Sort.DESCENDING);
+        RealmResults<Package> completedPackages = results.where().equalTo("completed", true).findAllSorted("createdAt", Sort.DESCENDING);
         List<Package> sortedPackages = new ArrayList<>(inTransitPackages);
         sortedPackages.addAll(completedPackages);
 
