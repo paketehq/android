@@ -93,19 +93,21 @@ public class CouriersFragment extends BackHandledFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // get couriers for update
-        viewModel.getCouriers()
-                .subscribe(new OnErrorObserver<Void>() {
-                    @Override
-                    public void onError(Throwable e) {
-                        // hide progress view
-                        binding.progress.setVisibility(View.GONE);
-                        // if we didn't have the cached data then we show the error
-                        if (viewModel.couriers.getValue().isEmpty()) {
-                            // show toast error
-                            Toast.makeText(getActivity(), "There was a problem fetching Couriers. Please try again.", Toast.LENGTH_SHORT).show();
+        if (viewModel.couriers.size() == 0) {
+            viewModel.getCouriers()
+                    .subscribe(new OnErrorObserver<Void>() {
+                        @Override
+                        public void onError(Throwable e) {
+                            // hide progress view
+                            binding.progress.setVisibility(View.GONE);
+                            // if we didn't have the cached data then we show the error
+                            if (viewModel.couriers.getValue().isEmpty()) {
+                                // show toast error
+                                Toast.makeText(getActivity(), "There was a problem fetching Couriers. Please try again.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
