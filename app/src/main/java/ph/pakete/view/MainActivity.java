@@ -133,6 +133,13 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        // force refresh packages
+        viewModel.refreshPackages();
+    }
+
+    @Override
     public void onBackPressed() {
         if(selectedFragment == null || !selectedFragment.onBackPressed()) {
             // Selected fragment did not consume the back press event.
