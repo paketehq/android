@@ -5,6 +5,7 @@ buildscript {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url  "http://dl.bintray.com/countly/maven" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
@@ -22,6 +23,7 @@ allprojects {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://jitpack.io" }
+        maven { url  "http://dl.bintray.com/countly/maven" }
     }
 }
 
