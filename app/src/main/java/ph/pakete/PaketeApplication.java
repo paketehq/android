@@ -20,6 +20,7 @@ import io.fabric.sdk.android.Kit;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.smooch.core.Smooch;
+import ly.count.android.sdk.Countly;
 import ph.pakete.model.PaketeService;
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
@@ -55,6 +56,9 @@ public class PaketeApplication extends MultiDexApplication {
         // Facebook
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+        // Countly
+        Countly.sharedInstance().init(this, "http://countly.pakete.ph", getResources().getString(R.string.countly_app_key));
+        Countly.sharedInstance().setViewTracking(true);
 
         context = getApplicationContext();
     }

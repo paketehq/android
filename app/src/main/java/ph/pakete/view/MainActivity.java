@@ -33,6 +33,7 @@ import com.google.android.gms.ads.AdView;
 
 import hotchemi.android.rate.AppRate;
 import hotchemi.android.rate.OnClickButtonListener;
+import ly.count.android.sdk.Countly;
 import ph.pakete.BackHandledFragment;
 import ph.pakete.PackagesAdapter;
 import ph.pakete.PaketeApplication;
@@ -98,6 +99,18 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         siren.setMinorUpdateAlertType(SirenAlertType.FORCE);
         siren.setPatchUpdateAlertType(SirenAlertType.FORCE);
         siren.checkVersion(this, SirenVersionCheckType.DAILY, SIREN_JSON_URL);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Countly.sharedInstance().onStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Countly.sharedInstance().onStop();
     }
 
     @Override
