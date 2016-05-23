@@ -140,6 +140,10 @@
    public *;
 }
 
+# Mockito
+-dontwarn org.mockito.**
+-dontwarn sun.reflect.**
+-dontwarn android.test.**
 
 # Pakete
 -keep class ph.pakete.model.Courier { *; }
