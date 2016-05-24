@@ -1,3 +1,19 @@
+## [0.9.2](https://github.com/paketehq/ios/releases/tag/0.9.2)
+
+#### Added
+- Countly Integration
+
+#### Fixed
+- Wrong layout for settings
+- Bug not updating package after changing name
+- Courier sorting bug
+- Bug not prefetching Couriers at launch
+
+#### Updated
+- Don't refetch couriers if we already have data
+
+---
+
 ## [0.9.1](https://github.com/paketehq/ios/releases/tag/0.9.1)
 
 #### Added
