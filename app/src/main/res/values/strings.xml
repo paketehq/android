@@ -10,8 +10,8 @@
 
     <!-- Add Package -->
     <string name="title_activity_add_package">Add Package</string>
-    <string name="edit_text_tracking_number_hint">Code</string>
-    <string name="edit_text_name_hint">Name</string>
+    <string name="edit_text_tracking_number_hint">Tracking Number</string>
+    <string name="edit_text_name_hint">Description</string>
 
     <!-- Settings -->
     <string name="title_activity_settings">Settings</string>
