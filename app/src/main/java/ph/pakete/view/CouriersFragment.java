@@ -93,7 +93,7 @@ public class CouriersFragment extends BackHandledFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // get couriers for update
-        if (viewModel.couriers.size() == 0) {
+        if (viewModel.couriers.getValue().size() == 0) {
             viewModel.getCouriers()
                     .subscribe(new OnErrorObserver<Void>() {
                         @Override
