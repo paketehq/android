@@ -36,7 +36,6 @@ public class PackagesViewModel implements ViewModel {
         loadCouriers();
         loadPackages();
         refreshPackages();
-        getCouriers().subscribe();
     }
 
     @Override
