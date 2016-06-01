@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 
 import ph.pakete.R;
+import ph.pakete.helpers.RelativeDateHelper;
 import ph.pakete.model.PackageTrackHistory;
 
 public class ItemPackageTrackHistoryViewModel extends BaseObservable implements ViewModel {
@@ -22,7 +23,7 @@ public class ItemPackageTrackHistoryViewModel extends BaseObservable implements 
     }
 
     public String getDate() {
-        return trackHistory.formattedDate();
+        return RelativeDateHelper.relativeTimeFromDate(trackHistory.getDate());
     }
 
     public GradientDrawable getStatusIconBackgroundColor() {

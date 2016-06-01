@@ -1,8 +1,8 @@
 package ph.pakete.model;
 
-import java.text.SimpleDateFormat;
+import android.text.format.DateUtils;
+
 import java.util.Date;
-import java.util.Locale;
 
 import io.realm.RealmObject;
 
@@ -20,10 +20,5 @@ public class PackageTrackHistory extends RealmObject {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String formattedDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
-        return dateFormat.format(this.date);
     }
 }
