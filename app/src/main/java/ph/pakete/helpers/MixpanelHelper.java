@@ -1,4 +1,4 @@
-package ph.pakete.model;
+package ph.pakete.helpers;
 
 import android.content.Context;
 
