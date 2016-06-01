@@ -145,6 +145,13 @@
 -dontwarn sun.reflect.**
 -dontwarn android.test.**
 
+## Joda Time
+
+-dontwarn org.joda.convert.**
+-dontwarn org.joda.time.**
+-keep class org.joda.time.** { *; }
+-keep interface org.joda.time.** { *; }
+
 # Pakete
 -keep class ph.pakete.model.Courier { *; }
 -keep class ph.pakete.model.Package { *; }
