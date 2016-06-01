@@ -32,7 +32,7 @@ import ph.pakete.BackHandledFragment;
 import ph.pakete.R;
 import ph.pakete.databinding.FragmentAddPackageBinding;
 import ph.pakete.model.Courier;
-import ph.pakete.model.MixpanelHelper;
+import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.model.Package;
 import ph.pakete.viewmodel.ItemPackageViewModel;
 import ph.pakete.viewmodel.PackagesViewModel;

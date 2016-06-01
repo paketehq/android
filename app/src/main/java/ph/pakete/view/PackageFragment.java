@@ -18,7 +18,7 @@ import ph.pakete.BackHandledFragment;
 import ph.pakete.PackageTrackHistoryAdapter;
 import ph.pakete.R;
 import ph.pakete.databinding.FragmentPackageBinding;
-import ph.pakete.model.MixpanelHelper;
+import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.viewmodel.ItemPackageViewModel;
 import ph.pakete.viewmodel.PackagesViewModel;
 import rx.android.schedulers.AndroidSchedulers;

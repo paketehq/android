@@ -27,7 +27,7 @@ import hotchemi.android.rate.AppRate;
 import io.smooch.ui.ConversationActivity;
 import ph.pakete.BuildConfig;
 import ph.pakete.R;
-import ph.pakete.model.MixpanelHelper;
+import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.model.Token;
 import ph.pakete.util.IabHelper;
 import ph.pakete.util.SkuDetails;

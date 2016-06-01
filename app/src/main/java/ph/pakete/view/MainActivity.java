@@ -38,7 +38,7 @@ import ph.pakete.BackHandledFragment;
 import ph.pakete.PackagesAdapter;
 import ph.pakete.PaketeApplication;
 import ph.pakete.R;
-import ph.pakete.model.MixpanelHelper;
+import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.model.Package;
 import ph.pakete.viewmodel.ItemPackageViewModel;
 import ph.pakete.viewmodel.PackagesViewModel;

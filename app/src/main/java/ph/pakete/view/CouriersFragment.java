@@ -20,7 +20,7 @@ import ph.pakete.R;
 import ph.pakete.databinding.FragmentCouriersBinding;
 import ph.pakete.helpers.OnErrorObserver;
 import ph.pakete.model.Courier;
-import ph.pakete.model.MixpanelHelper;
+import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.viewmodel.PackagesViewModel;
 
 public class CouriersFragment extends BackHandledFragment {
