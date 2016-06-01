@@ -7,6 +7,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +17,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import ph.pakete.BuildConfig;
+import ph.pakete.util.DateDeserializer;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -59,7 +61,7 @@ public interface PaketeService {
 
             // set GSON date formatter
             Gson gson = new GsonBuilder()
-                    .setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
+                    .registerTypeAdapter(Date.class, new DateDeserializer())
                     .setExclusionStrategies(new ExclusionStrategy() {
                         @Override
                         public boolean shouldSkipField(FieldAttributes f) {
