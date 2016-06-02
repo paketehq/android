@@ -24,6 +24,7 @@ android {
         debug {
             debuggable true
             minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // disable crashlytics
             buildConfigField "boolean", "USE_CRASHLYTICS", "false"
             ext.enableCrashlytics = false
@@ -52,6 +53,15 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+        transitive = true;
+    }
+    compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
+        transitive = true;
+    }
+    compile('com.twitter.sdk.android:tweet-composer:1.0.3@aar') {
+        transitive = true;
+    }
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
@@ -66,19 +76,10 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:0.4.0'
-    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services:9.0.1'
     compile 'io.smooch:core:latest.release'
     compile 'io.smooch:ui:latest.release'
     compile 'com.mixpanel.android:mixpanel-android:4.8.7'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
-    compile('com.twitter.sdk.android:twitter:1.13.1@aar') {
-        transitive = true;
-    }
-    compile('com.twitter.sdk.android:tweet-composer:1.0.3@aar') {
-        transitive = true;
-    }
     compile 'com.github.hotchemi:android-rate:1.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.11.0'
     compile 'com.github.eggheadgames:Siren:1.4.4'
