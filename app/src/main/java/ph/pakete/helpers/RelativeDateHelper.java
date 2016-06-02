@@ -3,6 +3,7 @@ package ph.pakete.helpers;
 import android.text.format.DateUtils;
 
 import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.Date;
@@ -10,27 +11,26 @@ import java.util.Date;
 public class RelativeDateHelper {
 
     public static String abbrevRelativeTimeFromDate(Date date) {
-        Date now = new Date();
-        long difference = Math.abs(date.getTime() - now.getTime());
-        Period period = new Period(date.getTime(), now.getTime());
         PeriodFormatterBuilder formatterBuilder = new PeriodFormatterBuilder();
-        if (difference > DateUtils.YEAR_IN_MILLIS) {
+        Date now = new Date();
+        Period period = new Period(date.getTime(), now.getTime());
+        if(period.getYears() != 0) {
             formatterBuilder.appendYears().appendSuffix("y");
-        } else if (difference > DateUtils.DAY_IN_MILLIS * 30) {
+        } else if(period.getMonths() != 0) {
             formatterBuilder.appendMonths().appendSuffix("m");
-        } else if (difference > DateUtils.WEEK_IN_MILLIS) {
+        } else if(period.getWeeks() != 0) {
             formatterBuilder.appendWeeks().appendSuffix("w");
-        } else if (difference > DateUtils.DAY_IN_MILLIS) {
+        } else if(period.getDays() != 0) {
             formatterBuilder.appendDays().appendSuffix("d");
-        } else if (difference > DateUtils.HOUR_IN_MILLIS) {
+        } else if(period.getHours() != 0) {
             formatterBuilder.appendHours().appendSuffix("h");
-        } else if (difference > DateUtils.MINUTE_IN_MILLIS) {
+        } else if(period.getMinutes() != 0) {
             formatterBuilder.appendMinutes().appendSuffix("m");
-        } else if (difference > DateUtils.SECOND_IN_MILLIS) {
+        } else if(period.getSeconds() != 0) {
             formatterBuilder.appendSeconds().appendSuffix("s");
         }
-
-        return formatterBuilder.toFormatter().print(period);
+        PeriodFormatter formatter = formatterBuilder.printZeroNever().toFormatter();
+        return formatter.print(period);
     }
 
     public static String relativeTimeFromDate(Date date) {
