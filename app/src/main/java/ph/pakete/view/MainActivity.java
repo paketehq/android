@@ -15,8 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,11 +30,9 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
 import hotchemi.android.rate.AppRate;
-import hotchemi.android.rate.OnClickButtonListener;
 import ly.count.android.sdk.Countly;
 import ph.pakete.BackHandledFragment;
 import ph.pakete.PackagesAdapter;
-import ph.pakete.PaketeApplication;
 import ph.pakete.R;
 import ph.pakete.helpers.MixpanelHelper;
 import ph.pakete.model.Package;
@@ -137,8 +133,13 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
+            final SettingsFragment settingsFragment = SettingsFragment.newInstance(viewModel);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
+                    .add(R.id.root_layout, settingsFragment)
+                    .addToBackStack(null)
+                    .commit();
             return true;
         }
 

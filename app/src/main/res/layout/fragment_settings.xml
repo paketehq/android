@@ -1,0 +1,262 @@
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context="ph.pakete.view.SettingsFragment">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:title="@string/title_activity_couriers"
+            android:showAsAction="never"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/remove_ads_layout"
+                    android:paddingBottom="@dimen/activity_vertical_margin"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:gravity="center_horizontal"
+                        android:id="@+id/header_text"/>
+
+                    <View
+                        android:layout_below="@id/header_text"
+                        android:layout_width="match_parent"
+                        android:layout_height=".5dp"
+                        android:id="@+id/top_separator_view"
+                        android:background="@color/lavender_gray" />
+
+                    <Button
+                        android:id="@+id/button_remove_ads"
+                        android:layout_below="@id/top_separator_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textAllCaps="false"
+                        android:text="@string/button_text_remove_ads"/>
+
+                    <View
+                        android:layout_below="@+id/button_remove_ads"
+                        android:layout_width="match_parent"
+                        android:layout_height=".5dp"
+                        android:background="@color/lavender_gray" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="Packages"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/button_sort_by"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:paddingLeft="9dp"
+                        android:gravity="left|center_vertical"
+                        android:textAllCaps="false"
+                        android:drawableLeft="@drawable/ic_star_filled_24"
+                        android:layout_alignParentLeft="true"
+                        android:text="Sort by"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:text="Last Updated"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/button_group_by_delivered"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:paddingLeft="9dp"
+                        android:gravity="left|center_vertical"
+                        android:textAllCaps="false"
+                        android:drawableLeft="@drawable/ic_message_24"
+                        android:layout_alignParentLeft="true"
+                        android:text="Group by Delivered"/>
+
+                    <Switch
+                        android:id="@+id/switch_group_by_delivered"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textOff="NO"
+                        android:textOn="YES"
+                        android:paddingRight="@dimen/activity_horizontal_margin"
+                        android:layout_centerVertical="true" />
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/header_text_support"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <Button
+                    android:id="@+id/button_rate_pakete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:paddingLeft="9dp"
+                    android:gravity="left|center_vertical"
+                    android:textAllCaps="false"
+                    android:drawableLeft="@drawable/ic_star_filled_24"
+                    android:onClick="onClickWriteAReviewButton"
+                    android:text="@string/button_text_rate_pakete"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <Button
+                    android:id="@+id/button_contact_the_pakete_team"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:paddingLeft="9dp"
+                    android:gravity="left|center_vertical"
+                    android:textAllCaps="false"
+                    android:drawableLeft="@drawable/ic_message_24"
+                    android:onClick="onClickContactPaketeTeamButton"
+                    android:text="@string/button_text_contact_the_pakete_team"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/header_text_tell_your_friends"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <Button
+                    android:id="@+id/button_tweet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="9dp"
+                    android:textAllCaps="false"
+                    android:drawableLeft="@drawable/ic_twitter_24"
+                    android:onClick="onClickTweetAboutPakete"
+                    android:text="@string/button_text_tweet_about_pakete"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <Button
+                    android:id="@+id/button_fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="9dp"
+                    android:textAllCaps="false"
+                    android:drawableLeft="@drawable/ic_facebook_24"
+                    android:onClick="onClickTellYourFriendsAboutPakete"
+                    android:text="@string/button_text_tell_your_friends_about_pakete"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height=".5dp"
+                    android:background="@color/lavender_gray" />
+
+                <TextView
+                    android:id="@+id/text_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:text="0.9 (5)"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>
