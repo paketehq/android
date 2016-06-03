@@ -91,6 +91,7 @@ public class SettingsFragment extends BackHandledFragment {
         binding.buttonTweet.setOnClickListener(v -> onClickTweetAboutPakete());
         binding.buttonFb.setOnClickListener(v -> onClickTellYourFriendsAboutPakete());
         binding.textSortBy.setText(viewModel.packagesSortBy().toString());
+        binding.buttonSortBy.setOnClickListener(v -> onClickSortByButton());
         binding.buttonGroupByDelivered.setOnClickListener(v -> binding.switchGroupByDelivered.setChecked(!binding.switchGroupByDelivered.isChecked()));
         binding.switchGroupByDelivered.setChecked(viewModel.packagesGroupByDelivered());
         binding.switchGroupByDelivered.setOnCheckedChangeListener((buttonView, isChecked) -> viewModel.groupByDelivered(isChecked));
@@ -167,6 +168,16 @@ public class SettingsFragment extends BackHandledFragment {
                     }
                 });
         removeAdsDialogBuilder.create().show();
+    }
+
+    private void onClickSortByButton() {
+        final SortByFragment sortByFragment = SortByFragment.newInstance(viewModel);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
+                .add(R.id.root_layout, sortByFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void onClickWriteAReviewButton() {

@@ -24,6 +24,9 @@
     <string name="button_text_tweet_about_pakete">Tweet about Pakete</string>
     <string name="button_text_tell_your_friends_about_pakete">Tell your friends about Pakete</string>
 
+    <!-- Sort By -->
+    <string name="title_activity_sort_by">Sort By</string>
+
     <!-- Share Messages -->
     <string name="share_message">Checkout Pakete - a free PH Package Tracking app that I use to track my packages</string>
 
