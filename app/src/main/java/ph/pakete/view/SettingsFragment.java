@@ -95,6 +95,8 @@ public class SettingsFragment extends BackHandledFragment {
         binding.buttonGroupByDelivered.setOnClickListener(v -> binding.switchGroupByDelivered.setChecked(!binding.switchGroupByDelivered.isChecked()));
         binding.switchGroupByDelivered.setChecked(viewModel.packagesGroupByDelivered());
         binding.switchGroupByDelivered.setOnCheckedChangeListener((buttonView, isChecked) -> viewModel.groupByDelivered(isChecked));
+        // listen to sort by change
+        viewModel.packagesSortByReplySubject.subscribe(sortBy -> binding.textSortBy.setText(viewModel.packagesSortBy().toString()));
 
         // set version
         String version = String.format(Locale.getDefault(), "%s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
