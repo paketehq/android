@@ -32,11 +32,13 @@ public class PackagesViewModel implements ViewModel {
 
     public ReplaySubject<List<ReplaySubject<Package>>> packages = ReplaySubject.create();
     public ReplaySubject<List<Courier>> couriers = ReplaySubject.create();
+    public ReplaySubject<PackagesSortBy> packagesSortByReplySubject = ReplaySubject.create();
 
     private Context context;
 
     public PackagesViewModel(Context context) {
         this.context = context;
+        this.packagesSortByReplySubject.onNext(packagesSortBy());
         loadCouriers();
         loadPackages();
         refreshPackages();
@@ -202,6 +204,7 @@ public class PackagesViewModel implements ViewModel {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(Constants.SharedPreferences.SORT_BY_KEY, sortBy.ordinal());
         editor.apply();
+        packagesSortByReplySubject.onNext(sortBy);
         // reload packages
         loadPackages();
     }
