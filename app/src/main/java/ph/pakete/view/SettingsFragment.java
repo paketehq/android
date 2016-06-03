@@ -90,6 +90,10 @@ public class SettingsFragment extends BackHandledFragment {
         binding.buttonContactThePaketeTeam.setOnClickListener(v -> onClickContactPaketeTeamButton());
         binding.buttonTweet.setOnClickListener(v -> onClickTweetAboutPakete());
         binding.buttonFb.setOnClickListener(v -> onClickTellYourFriendsAboutPakete());
+        binding.textSortBy.setText(viewModel.packagesSortBy().toString());
+        binding.buttonGroupByDelivered.setOnClickListener(v -> binding.switchGroupByDelivered.setChecked(!binding.switchGroupByDelivered.isChecked()));
+        binding.switchGroupByDelivered.setChecked(viewModel.packagesGroupByDelivered());
+        binding.switchGroupByDelivered.setOnCheckedChangeListener((buttonView, isChecked) -> viewModel.groupByDelivered(isChecked));
 
         // set version
         String version = String.format(Locale.getDefault(), "%s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
