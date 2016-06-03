@@ -17,7 +17,7 @@ public class RelativeDateHelper {
         if(period.getYears() != 0) {
             formatterBuilder.appendYears().appendSuffix("y");
         } else if(period.getMonths() != 0) {
-            formatterBuilder.appendMonths().appendSuffix("m");
+            formatterBuilder.appendMonths().appendSuffix("mo");
         } else if(period.getWeeks() != 0) {
             formatterBuilder.appendWeeks().appendSuffix("w");
         } else if(period.getDays() != 0) {
