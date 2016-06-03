@@ -1,9 +1,12 @@
 package ph.pakete.viewmodel;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +15,12 @@ import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import io.realm.Sort;
+import ph.pakete.Constants;
 import ph.pakete.PaketeApplication;
 import ph.pakete.model.Courier;
 import ph.pakete.model.Package;
+import ph.pakete.PackagesSortBy;
+import ph.pakete.model.PackageTrackHistory;
 import ph.pakete.model.PaketeService;
 import rx.Observable;
 import rx.Subscriber;
@@ -181,6 +187,34 @@ public class PackagesViewModel implements ViewModel {
         }
     }
 
+    // Settings
+    public PackagesSortBy packagesSortBy() {
+        SharedPreferences preferences = PaketeApplication.getAppContext().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        int packagesSortBy = preferences.getInt(Constants.SharedPreferences.SORT_BY_KEY, PackagesSortBy.LastUpdated.ordinal());
+        return PackagesSortBy.fromInteger(packagesSortBy);
+    }
+
+    public boolean packagesGroupByDelivered() {
+        SharedPreferences preferences = PaketeApplication.getAppContext().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(Constants.SharedPreferences.GROUP_BY_DELIVERED_KEY, true);
+    }
+
+    public void sortBy(PackagesSortBy sortBy) {
+        SharedPreferences preferences = PaketeApplication.getAppContext().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt(Constants.SharedPreferences.SORT_BY_KEY, sortBy.ordinal());
+        editor.apply();
+    }
+
+    public void groupByDelivered(boolean groupBy) {
+        SharedPreferences preferences = PaketeApplication.getAppContext().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(Constants.SharedPreferences.GROUP_BY_DELIVERED_KEY, groupBy);
+        editor.apply();
+        // reload packages
+        loadPackages();
+    }
+
     private void loadCouriers() {
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Courier> query = realm.where(Courier.class);
@@ -189,14 +223,44 @@ public class PackagesViewModel implements ViewModel {
     }
 
     private void loadPackages() {
+        List<Package> sortedPackages = new ArrayList<>();
         Realm realm = Realm.getDefaultInstance();
         RealmQuery<Package> query = realm.where(Package.class).equalTo("archived", false);
-        RealmResults<Package> results = query.findAll();
-        // we would like to sort packages by grouping intransit at the top and completed at the bottom
-        RealmResults<Package> inTransitPackages = results.where().equalTo("completed", false).findAllSorted("createdAt", Sort.DESCENDING);
-        RealmResults<Package> completedPackages = results.where().equalTo("completed", true).findAllSorted("createdAt", Sort.DESCENDING);
-        List<Package> sortedPackages = new ArrayList<>(inTransitPackages);
-        sortedPackages.addAll(completedPackages);
+        sortedPackages.addAll(query.findAll());
+
+        // sort packages
+        switch (packagesSortBy()) {
+            case LastUpdated:
+                Collections.sort(sortedPackages, (lhs, rhs) -> {
+                    PackageTrackHistory lhsTrackHistory = lhs.latestTrackHistory();
+                    PackageTrackHistory rhsTrackHistory = rhs.latestTrackHistory();
+                    if (lhsTrackHistory != null && rhsTrackHistory != null) {
+                        return rhsTrackHistory.getDate().compareTo(lhsTrackHistory.getDate());
+                    }
+                    return 0;
+                });
+            case DateAdded:
+                Collections.sort(sortedPackages, (lhs, rhs) -> rhs.getCreatedAt().compareTo(lhs.getCreatedAt()));
+            case Name:
+                Collections.sort(sortedPackages, (lhs, rhs) -> lhs.getName().compareTo(rhs.getName()));
+        }
+
+        // check if grouped by delivered
+        if (packagesGroupByDelivered()) {
+            // group packages by in transit and completed
+            List<Package> inTransitPackages = new ArrayList<>();
+            List<Package> completedPackages = new ArrayList<>();
+            for (Package aPackage :sortedPackages) {
+                if (aPackage.getCompleted()) {
+                    completedPackages.add(aPackage);
+                } else {
+                    inTransitPackages.add(aPackage);
+                }
+            }
+            sortedPackages.clear();
+            sortedPackages.addAll(inTransitPackages);
+            sortedPackages.addAll(completedPackages);
+        }
 
         // convert to replay subjects
         List<ReplaySubject<Package>> aPackages = new ArrayList<>();
