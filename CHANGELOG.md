@@ -1,4 +1,23 @@
-## [0.9.2](https://github.com/paketehq/ios/releases/tag/0.9.2)
+## [0.9.3](https://github.com/paketehq/android/releases/tag/0.9.3)
+
+#### Added
+- Sort Packages by Last Updated, Date Added or Name
+- Able to group Delivered packages or not
+- Relative time support
+
+#### Fixed
+- Package update failure handling
+- Restore purchases not removing ads right away
+- Typo from Settings "left" instead of "leave"
+
+#### Updated
+- Changed text placeholder from "Code" to "Tracking Number"
+- Changed text placeholder from "Name" to "Description"
+- Temporarily disabled smooch and use Email feedback instead
+- Removed preloading of couriers at launch
+- Converted Settings to Fragment
+
+## [0.9.2](https://github.com/paketehq/android/releases/tag/0.9.2)
 
 #### Added
 - Countly Integration
@@ -14,7 +33,7 @@
 
 ---
 
-## [0.9.1](https://github.com/paketehq/ios/releases/tag/0.9.1)
+## [0.9.1](https://github.com/paketehq/android/releases/tag/0.9.1)
 
 #### Added
 - Twitter Share
@@ -28,7 +47,7 @@
 
 ---
 
-## [0.9](https://github.com/paketehq/ios/releases/tag/0.9)
+## [0.9](https://github.com/paketehq/android/releases/tag/0.9)
 Released on 2016-05-16.
 
 #### Added
