@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -187,7 +188,16 @@ public class SettingsFragment extends BackHandledFragment {
     }
 
     private void onClickContactPaketeTeamButton() {
-        ConversationActivity.show(getActivity());
+        //ConversationActivity.show(getActivity());
+        Intent Email = new Intent(Intent.ACTION_SEND);
+        Email.setType("text/email");
+        Email.putExtra(Intent.EXTRA_EMAIL, new String[] { "support@pakete.ph" });
+        Email.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+        try {
+            startActivity(Intent.createChooser(Email, "Send Feedback:"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(getActivity(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void onClickTweetAboutPakete() {
