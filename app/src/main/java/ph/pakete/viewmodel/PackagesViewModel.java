@@ -204,6 +204,8 @@ public class PackagesViewModel implements ViewModel {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(Constants.SharedPreferences.SORT_BY_KEY, sortBy.ordinal());
         editor.apply();
+        // reload packages
+        loadPackages();
     }
 
     public void groupByDelivered(boolean groupBy) {
