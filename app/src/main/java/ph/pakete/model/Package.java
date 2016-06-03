@@ -75,6 +75,10 @@ public class Package extends RealmObject {
         this.updating = updating;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
     public PackageTrackHistory latestTrackHistory() {
         if (getTrackHistory().size() > 0) {
             return getTrackHistory().first();
