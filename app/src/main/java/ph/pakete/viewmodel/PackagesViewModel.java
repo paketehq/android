@@ -241,10 +241,13 @@ public class PackagesViewModel implements ViewModel {
                     }
                     return 0;
                 });
+                break;
             case DateAdded:
                 Collections.sort(sortedPackages, (lhs, rhs) -> rhs.getCreatedAt().compareTo(lhs.getCreatedAt()));
+                break;
             case Name:
                 Collections.sort(sortedPackages, (lhs, rhs) -> lhs.getName().compareTo(rhs.getName()));
+                break;
         }
 
         // check if grouped by delivered
