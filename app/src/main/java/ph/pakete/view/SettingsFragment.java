@@ -30,9 +30,9 @@ import java.util.List;
 import java.util.Locale;
 
 import hotchemi.android.rate.AppRate;
-import io.smooch.ui.ConversationActivity;
 import ph.pakete.BackHandledFragment;
 import ph.pakete.BuildConfig;
+import ph.pakete.Constants;
 import ph.pakete.R;
 import ph.pakete.databinding.FragmentSettingsBinding;
 import ph.pakete.helpers.MixpanelHelper;
@@ -46,8 +46,6 @@ public class SettingsFragment extends BackHandledFragment {
     private FragmentSettingsBinding binding;
 
     private IabHelper inAppBillingHelper;
-    private static final String SKU_REMOVE_ADS = "ph.pakete.iap.removeads";
-    private static final int REMOVE_ADS_PURCHASE_CODE = 10001;
 
     public static SettingsFragment newInstance(PackagesViewModel viewModel) {
         final SettingsFragment fragment = new SettingsFragment();
@@ -218,7 +216,7 @@ public class SettingsFragment extends BackHandledFragment {
         // purchase listener
         IabHelper.OnIabPurchaseFinishedListener purchaseFinishedListener = (result, purchase) -> {
             if (purchase != null) {
-                if (purchase.getSku().equals(SKU_REMOVE_ADS)) {
+                if (purchase.getSku().equals(Constants.IAP.SKU_REMOVE_ADS)) {
                     broadcastRemoveAds();
                 }
             }
@@ -226,8 +224,8 @@ public class SettingsFragment extends BackHandledFragment {
 
         try {
             inAppBillingHelper.launchPurchaseFlow(getActivity(),
-                    SKU_REMOVE_ADS,
-                    REMOVE_ADS_PURCHASE_CODE,
+                    Constants.IAP.SKU_REMOVE_ADS,
+                    Constants.IAP.REMOVE_ADS_PURCHASE_CODE,
                     purchaseFinishedListener,
                     Token.getUniqueID());
         } catch (Exception e) {
@@ -254,7 +252,7 @@ public class SettingsFragment extends BackHandledFragment {
             }
 
             if (result.isSuccess() && inventory != null) {
-                SkuDetails removeAdsSkuDetails = inventory.getSkuDetails(SKU_REMOVE_ADS);
+                SkuDetails removeAdsSkuDetails = inventory.getSkuDetails(Constants.IAP.SKU_REMOVE_ADS);
                 if (removeAdsSkuDetails != null) {
                     Resources res = getResources();
                     String text = String.format(res.getString(R.string.header_text_remove_ads), removeAdsSkuDetails.getPrice());
@@ -275,7 +273,7 @@ public class SettingsFragment extends BackHandledFragment {
                 // fetch remove ads sku details
                 try {
                     List additionalSkuList = new ArrayList();
-                    additionalSkuList.add(SKU_REMOVE_ADS);
+                    additionalSkuList.add(Constants.IAP.SKU_REMOVE_ADS);
                     inAppBillingHelper.queryInventoryAsync(true, additionalSkuList,
                             queryInventoryFinishedListener);
                 } catch (Exception e) {
