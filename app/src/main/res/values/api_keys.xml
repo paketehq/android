@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="native_ad_unit_id"></string>
     <string name="banner_ad_unit_id"></string>
     <string name="interstitial_ad_unit_id"></string>
     <string name="smooch_app_token"></string>
