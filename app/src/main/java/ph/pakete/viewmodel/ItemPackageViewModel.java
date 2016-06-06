@@ -5,16 +5,10 @@ import android.databinding.BaseObservable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
-import android.text.format.DateUtils;
 import android.view.View;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import io.realm.RealmList;
 import ph.pakete.R;
-import ph.pakete.helpers.RelativeDateHelper;
 import ph.pakete.model.Package;
 import ph.pakete.model.PackageTrackHistory;
 import rx.subjects.ReplaySubject;
@@ -55,14 +49,6 @@ public class ItemPackageViewModel extends BaseObservable implements ViewModel {
             return lastTrackHistory.getStatus();
         }
         return "No information available yet";
-    }
-
-    public String getLastUpdateDate() {
-        PackageTrackHistory lastTrackHistory = aPackage.getValue().latestTrackHistory();
-        if (lastTrackHistory != null) {
-            return RelativeDateHelper.abbrevRelativeTimeFromDate(lastTrackHistory.getDate());
-        }
-        return "";
     }
 
     public int getUpdating() {
