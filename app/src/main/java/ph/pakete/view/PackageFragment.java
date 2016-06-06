@@ -1,6 +1,8 @@
 package ph.pakete.view;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -123,6 +125,13 @@ public class PackageFragment extends BackHandledFragment {
     }
 
     private void setupNativeAds() {
+        // first we check if the user already purchased remove ads
+        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
+        if (preferences.getBoolean("removedAds", false)) {
+            binding.adView.setVisibility(View.GONE);
+            return;
+        }
+
         String nativeAdUnitID = getResources().getString(R.string.native_ad_unit_id);
         if (nativeAdUnitID.isEmpty()) { return; }
 
