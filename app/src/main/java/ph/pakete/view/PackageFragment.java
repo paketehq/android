@@ -22,6 +22,7 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.NativeExpressAdView;
 
 import ph.pakete.BackHandledFragment;
+import ph.pakete.Constants;
 import ph.pakete.PackageTrackHistoryAdapter;
 import ph.pakete.R;
 import ph.pakete.databinding.FragmentPackageBinding;
@@ -126,8 +127,8 @@ public class PackageFragment extends BackHandledFragment {
 
     private void setupNativeAds() {
         // first we check if the user already purchased remove ads
-        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
-        if (preferences.getBoolean("removedAds", false)) {
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        if (preferences.getBoolean(Constants.SharedPreferences.REMOVE_ADS_KEY, false)) {
             binding.adView.setVisibility(View.GONE);
             return;
         }

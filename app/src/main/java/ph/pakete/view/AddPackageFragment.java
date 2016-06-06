@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ph.pakete.BackHandledFragment;
+import ph.pakete.Constants;
 import ph.pakete.R;
 import ph.pakete.databinding.FragmentAddPackageBinding;
 import ph.pakete.model.Courier;
@@ -297,8 +298,8 @@ public class AddPackageFragment extends BackHandledFragment {
     }
 
     private void showInterstitialAd() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
-        if (preferences.getBoolean("removedAds", false)) { return; }
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        if (preferences.getBoolean(Constants.SharedPreferences.REMOVE_ADS_KEY, false)) { return; }
         if (interstitialAd == null) { return; }
         if (interstitialAd.isLoaded()) interstitialAd.show();
     }

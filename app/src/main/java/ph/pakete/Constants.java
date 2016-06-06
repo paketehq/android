@@ -5,5 +5,6 @@ public interface Constants {
         public static final String NAME = "ph.pakete.preferences";
         public static final String SORT_BY_KEY = "SORT_BY_KEY";
         public static final String GROUP_BY_DELIVERED_KEY = "GROUP_BY_DELIVERED_KEY";
+        public static final String REMOVE_ADS_KEY = "REMOVE_ADS_KEY";
     }
 }

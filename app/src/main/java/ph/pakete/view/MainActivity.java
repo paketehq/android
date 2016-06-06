@@ -32,6 +32,7 @@ import com.google.android.gms.ads.AdView;
 import hotchemi.android.rate.AppRate;
 import ly.count.android.sdk.Countly;
 import ph.pakete.BackHandledFragment;
+import ph.pakete.Constants;
 import ph.pakete.PackagesAdapter;
 import ph.pakete.R;
 import ph.pakete.helpers.MixpanelHelper;
@@ -191,8 +192,8 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
 
     private void setupAdBannerView() {
         // first we check if the user already purchased remove ads
-        SharedPreferences preferences = getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
-        if (preferences.getBoolean("removedAds", false)) { return; }
+        SharedPreferences preferences = getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        if (preferences.getBoolean(Constants.SharedPreferences.REMOVE_ADS_KEY, false)) { return; }
 
         String bannerAdUnitID = getResources().getString(R.string.banner_ad_unit_id);
         if (bannerAdUnitID.isEmpty()) { return; }

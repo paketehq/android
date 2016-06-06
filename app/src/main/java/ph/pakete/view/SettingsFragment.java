@@ -289,9 +289,9 @@ public class SettingsFragment extends BackHandledFragment {
 
     private void broadcastRemoveAds() {
         // save to preferences
-        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean("removedAds", true);
+        editor.putBoolean(Constants.SharedPreferences.REMOVE_ADS_KEY, true);
         editor.apply();
 
         // broadcast remove ads
@@ -304,7 +304,7 @@ public class SettingsFragment extends BackHandledFragment {
     }
 
     private Boolean alreadyPurchasedRemoveAds() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("ph.pakete.preferences", Context.MODE_PRIVATE);
-        return preferences.getBoolean("removedAds", false);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.SharedPreferences.NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(Constants.SharedPreferences.REMOVE_ADS_KEY, false);
     }
 }
