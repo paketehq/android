@@ -55,24 +55,10 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/text_package_status_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="8dp"
-            android:paddingBottom="0dp"
-            android:textSize="12sp"
-            android:textColor="@color/gray"
-            android:text="@{viewModel.lastUpdateDate}"
-            android:layout_alignParentRight="true" />
-
-        <TextView
             android:id="@+id/text_package_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/circle_layout"
-            android:layout_toLeftOf="@id/text_package_status_date"
             android:paddingRight="5dp"
             android:paddingTop="8dp"
             android:paddingBottom="0dp"
