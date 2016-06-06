@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         if (bannerAdUnitID.isEmpty()) { return; }
 
         AdView bottomBannerAdView = new AdView(this);
-        bottomBannerAdView.setAdSize(AdSize.BANNER);
+        bottomBannerAdView.setAdSize(AdSize.SMART_BANNER);
         bottomBannerAdView.setAdUnitId(bannerAdUnitID);
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
