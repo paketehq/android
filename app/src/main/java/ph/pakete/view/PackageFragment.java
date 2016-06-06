@@ -12,7 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 import ph.pakete.BackHandledFragment;
 import ph.pakete.PackageTrackHistoryAdapter;
@@ -77,6 +82,8 @@ public class PackageFragment extends BackHandledFragment {
 
         // track mixpanel
         MixpanelHelper.getMixpanel(getActivity()).track("Package View");
+        // setup ads
+        setupNativeAds();
 
         return binding.getRoot();
     }
@@ -113,6 +120,23 @@ public class PackageFragment extends BackHandledFragment {
     public void onDestroy() {
         super.onDestroy();
         packageViewModel.getPackage().unsubscribeOn(AndroidSchedulers.mainThread());
+    }
+
+    private void setupNativeAds() {
+        String nativeAdUnitID = getResources().getString(R.string.native_ad_unit_id);
+        if (nativeAdUnitID.isEmpty()) { return; }
+
+        NativeExpressAdView nativeExpressAdView = new NativeExpressAdView(getActivity());
+        nativeExpressAdView.setAdSize(new AdSize(AdSize.FULL_WIDTH, 80));
+        nativeExpressAdView.setAdUnitId(nativeAdUnitID);
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+        LinearLayout adViewContainer = binding.adView;
+        if (adViewContainer != null) {
+            adViewContainer.addView(nativeExpressAdView);
+            nativeExpressAdView.loadAd(adRequest);
+        }
     }
 
     private void editPackage() {
