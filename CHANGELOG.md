@@ -1,3 +1,13 @@
+## [0.9.4](https://github.com/paketehq/android/releases/tag/0.9.4)
+
+#### Added
+- Native Ads
+
+#### Updated
+- Removed Relative time
+
+---
+
 ## [0.9.3](https://github.com/paketehq/android/releases/tag/0.9.3)
 
 #### Added
@@ -16,6 +26,8 @@
 - Temporarily disabled smooch and use Email feedback instead
 - Removed preloading of couriers at launch
 - Converted Settings to Fragment
+
+---
 
 ## [0.9.2](https://github.com/paketehq/android/releases/tag/0.9.2)
 
