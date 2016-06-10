@@ -104,13 +104,14 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         siren.setMajorUpdateAlertType(SirenAlertType.FORCE);
         siren.setMinorUpdateAlertType(SirenAlertType.FORCE);
         siren.setPatchUpdateAlertType(SirenAlertType.FORCE);
-        siren.checkVersion(this, SirenVersionCheckType.DAILY, SIREN_JSON_URL);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         Countly.sharedInstance().onStart(this);
+        // check for new version
+        Siren.getInstance(getApplicationContext()).checkVersion(this, SirenVersionCheckType.DAILY, SIREN_JSON_URL);
     }
 
     @Override
