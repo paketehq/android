@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         if(selectedFragment == null || !selectedFragment.onBackPressed()) {
             // Selected fragment did not consume the back press event.
             if (exit) {
+                super.onBackPressed();
                 finish(); // finish activity
             } else {
                 Toast.makeText(this, "Press Back again to Exit.",
