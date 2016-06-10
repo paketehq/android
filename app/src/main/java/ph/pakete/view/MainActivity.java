@@ -29,6 +29,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import hotchemi.android.rate.AppRate;
 import ly.count.android.sdk.Countly;
 import ph.pakete.BackHandledFragment;
@@ -84,7 +87,13 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
         });
 
         // track mixpanel
-        MixpanelHelper.getMixpanel(this).track("Packages View");
+        try {
+            JSONObject props = new JSONObject();
+            props.put("Packages Count", viewModel.packages.getValue().size());
+            MixpanelHelper.getMixpanel(this).track("Packages View", props);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         // listen for broadcast
         LocalBroadcastManager.getInstance(this).registerReceiver(messageReceiver,
                 new IntentFilter("removeAds"));
