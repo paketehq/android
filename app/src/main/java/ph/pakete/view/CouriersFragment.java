@@ -104,6 +104,7 @@ public class CouriersFragment extends BackHandledFragment {
                             if (viewModel.couriers.getValue().isEmpty()) {
                                 // show toast error
                                 Toast.makeText(getActivity(), "There was a problem fetching Couriers. Please try again.", Toast.LENGTH_SHORT).show();
+                                onBackPressed();
                             }
                         }
                     });
