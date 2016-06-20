@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements BackHandledFragme
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle("Packages");
+        }
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
