@@ -42,7 +42,7 @@ public interface PaketeService {
                         String user_agent = "Pakete/ph.pakete " + Build.FINGERPRINT + " (" + BuildConfig.VERSION_NAME + ")";
                         Request request = original.newBuilder()
                                 .header("User-Agent", user_agent)
-                                .header("Authorization", new Token().toString())
+                                .header("pakete-api-key", new Token().toString())
                                 .method(original.method(), original.body())
                                 .build();
 
